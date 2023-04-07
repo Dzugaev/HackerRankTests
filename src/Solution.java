@@ -1,8 +1,7 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Solution {
 
@@ -14,8 +13,8 @@ public class Solution {
 //        int [] o = twoSum(arr, 6);
 //        System.out.println(o[0]+" "+ o[1]);
 
-        int [] arr = {1,1,2};
-        System.out.println(removeDuplicates(arr));
+        int [] arr = {1,1,2,2,6};
+        System.out.println(searchInsert35(arr, 3));
 
 
     }
@@ -23,6 +22,61 @@ public class Solution {
     /**
      * ----------LEETCODE--------------
      */
+
+    public static int searchInsert35 (int[] nums, int target) {
+
+        /**solution with stream api*/
+//        ArrayList<Integer> list = (ArrayList<Integer>) Arrays.stream(nums).boxed().collect(Collectors.toList());
+//        if(list.contains(target)){
+//            return list.indexOf(target);
+//        }else {
+//            Optional<Integer> first = list.stream().filter(x -> x > target).findFirst();
+//            if(first.isEmpty()){
+//                return nums.length;
+//            }else {
+//                return list.indexOf(first.get());
+//            }
+//        }
+        ArrayList<Integer> list = (ArrayList<Integer>) Arrays.stream(nums).boxed().collect(Collectors.toList());
+        if(list.contains(target)){
+            return list.indexOf(target);
+        }else {
+            int start = 0;
+            int end = nums.length-1;
+            while (true){
+                if(list.get((end-start)/2) > target){
+                    end = end/2;
+                }
+                else {
+                    start = end/2;
+                }
+            }
+        }
+
+    }
+
+    // unfineshed
+    public static int divide(int dividend, int divisor) {
+        int times = -1;
+        int sum = 0;
+
+        if (divisor == 0) {
+            return 0;
+        }
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
+        }
+
+        boolean isNegative = ((dividend < 0 || divisor < 0) && !(dividend < 0 && divisor < 0));
+        long longDividend = Math.abs((long) dividend);
+        long longDivisor = Math.abs((long) divisor);
+        while (longDividend >= sum) {
+            sum += longDivisor;
+            times++;
+        }
+
+        return isNegative ? times * -1 : times;
+    }
 
     // unfineshed
     public static int removeDuplicates(int[] nums) {
@@ -55,11 +109,11 @@ public class Solution {
                     continue;
                 }
                 case ("}"): {
-                    if (last.isEmpty() || last.pop()!=2) return false;
+                    if (last.isEmpty() || last.pop() != 2) return false;
                     continue;
                 }
                 case ("]"): {
-                    if (last.isEmpty() || last.pop()!=3) return false;
+                    if (last.isEmpty() || last.pop() != 3) return false;
                 }
             }
         }
