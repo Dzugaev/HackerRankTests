@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -7,11 +8,6 @@ public class Solution {
 
     public static void main(String[] args) throws IOException {
 
-        //bigDecimal();
-        //regEx2();
-//        int[] arr = {2,4,11,3};
-//        int [] o = twoSum(arr, 6);
-//        System.out.println(o[0]+" "+ o[1]);
 
         int [] arr = {1,1,2,2,6};
         System.out.println(searchInsert35(arr, 3));
@@ -19,9 +15,71 @@ public class Solution {
 
     }
 
+    /**livecode test*/
+
+    /**"class User{
+     LocalDate birthDate;
+     String fio;
+     }
+
+     Необходимо написать функцию public … groupUsersByBirthDate(List<User> user), которая будет
+     группировать пользователей по датам их рождения(полю birthDate).
+     Вместо троеточия указать и обосновать оптимальный тип данных, который должен возвращать метод."
+
+     User user1 = new User(LocalDate.now(), "A");
+     User user2 = new User(LocalDate.MAX, "B");
+     User user3 = new User(LocalDate.MAX, "C");
+
+     HashMap<LocalDate, ArrayList<User>> output = groupUsersByBirthDate(Arrays.asList(user1, user2, user3));
+     System.out.println(output);
+     */
+    static class  User{
+        LocalDate birthDate;
+        String fio;
+
+        public User(LocalDate birthDate, String fio) {
+            this.birthDate = birthDate;
+            this.fio = fio;
+        }
+
+        @Override
+        public String toString() {
+            return fio;
+        }
+    }
+    public static HashMap<LocalDate, ArrayList<User>> groupUsersByBirthDate(List<User> users){
+        HashMap<LocalDate, ArrayList<User>> groupedUsers = new HashMap<>();
+
+        for (User user: users ) {
+            if(groupedUsers.containsKey(user.birthDate)){
+                ArrayList<User> tmp = groupedUsers.get(user.birthDate);
+                tmp.add(user);
+                groupedUsers.put(user.birthDate,  tmp);
+            }else {
+                groupedUsers.put(user.birthDate, new ArrayList<>(Arrays.asList(user)));
+            }
+        }
+
+        return groupedUsers;
+    }
+
     /**
      * ----------LEETCODE--------------
      */
+
+    public static String longestPalindrome5(String s) {
+        String output="";
+        ArrayList<String> letters = new ArrayList<>(Arrays.asList(s.split("")));
+        for (int i = 0; i < s.length(); i++) {
+            String first = letters.get(i);
+
+        }
+
+        return output;
+    }
+    private static void process(){
+
+    }
 
     public static int searchInsert35 (int[] nums, int target) {
 
