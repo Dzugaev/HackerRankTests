@@ -9,31 +9,32 @@ public class Solution {
     public static void main(String[] args) throws IOException {
 
 
-        int [] arr = {1,1,2,2,6};
-        System.out.println(searchInsert35(arr, 3));
+//        int [] arr = {1,1,2,2,6};
+        System.out.println(lengthOfLastWord58("arfadafasd lol"));
 
 
     }
 
     /**livecode test*/
 
-    /**"class User{
-     LocalDate birthDate;
-     String fio;
-     }
-
-     Необходимо написать функцию public … groupUsersByBirthDate(List<User> user), которая будет
-     группировать пользователей по датам их рождения(полю birthDate).
-     Вместо троеточия указать и обосновать оптимальный тип данных, который должен возвращать метод."
-
-     User user1 = new User(LocalDate.now(), "A");
-     User user2 = new User(LocalDate.MAX, "B");
-     User user3 = new User(LocalDate.MAX, "C");
-
-     HashMap<LocalDate, ArrayList<User>> output = groupUsersByBirthDate(Arrays.asList(user1, user2, user3));
-     System.out.println(output);
+    /**
+     * "class User{
+     * LocalDate birthDate;
+     * String fio;
+     * }
+     * <p>
+     * Необходимо написать функцию public … groupUsersByBirthDate(List<User> user), которая будет
+     * группировать пользователей по датам их рождения(полю birthDate).
+     * Вместо троеточия указать и обосновать оптимальный тип данных, который должен возвращать метод."
+     * <p>
+     * User user1 = new User(LocalDate.now(), "A");
+     * User user2 = new User(LocalDate.MAX, "B");
+     * User user3 = new User(LocalDate.MAX, "C");
+     * <p>
+     * HashMap<LocalDate, ArrayList<User>> output = groupUsersByBirthDate(Arrays.asList(user1, user2, user3));
+     * System.out.println(output);
      */
-    static class  User{
+    static class User {
         LocalDate birthDate;
         String fio;
 
@@ -47,15 +48,16 @@ public class Solution {
             return fio;
         }
     }
-    public static HashMap<LocalDate, ArrayList<User>> groupUsersByBirthDate(List<User> users){
+
+    public static HashMap<LocalDate, ArrayList<User>> groupUsersByBirthDate(List<User> users) {
         HashMap<LocalDate, ArrayList<User>> groupedUsers = new HashMap<>();
 
-        for (User user: users ) {
-            if(groupedUsers.containsKey(user.birthDate)){
+        for (User user : users) {
+            if (groupedUsers.containsKey(user.birthDate)) {
                 ArrayList<User> tmp = groupedUsers.get(user.birthDate);
                 tmp.add(user);
-                groupedUsers.put(user.birthDate,  tmp);
-            }else {
+                groupedUsers.put(user.birthDate, tmp);
+            } else {
                 groupedUsers.put(user.birthDate, new ArrayList<>(Arrays.asList(user)));
             }
         }
@@ -67,9 +69,18 @@ public class Solution {
      * ----------LEETCODE--------------
      */
 
+    public static int lengthOfLastWord58(String s) {
+        String [] words = s.split(" ");
+        String [] word = words[words.length-1].split(" ");
+        return word.length-1;
+    }
+
     public static String longestPalindrome5(String s) {
-        String output="";
+        String output = "";
         ArrayList<String> letters = new ArrayList<>(Arrays.asList(s.split("")));
+
+
+
         for (int i = 0; i < s.length(); i++) {
             String first = letters.get(i);
 
@@ -77,11 +88,12 @@ public class Solution {
 
         return output;
     }
-    private static void process(){
+
+    private static void process() {
 
     }
 
-    public static int searchInsert35 (int[] nums, int target) {
+    public static int searchInsert35(int[] nums, int target) {
 
         /**solution with stream api*/
 //        ArrayList<Integer> list = (ArrayList<Integer>) Arrays.stream(nums).boxed().collect(Collectors.toList());
@@ -96,17 +108,16 @@ public class Solution {
 //            }
 //        }
         ArrayList<Integer> list = (ArrayList<Integer>) Arrays.stream(nums).boxed().collect(Collectors.toList());
-        if(list.contains(target)){
+        if (list.contains(target)) {
             return list.indexOf(target);
-        }else {
+        } else {
             int start = 0;
-            int end = nums.length-1;
-            while (true){
-                if(list.get((end-start)/2) > target){
-                    end = end/2;
-                }
-                else {
-                    start = end/2;
+            int end = nums.length - 1;
+            while (true) {
+                if (list.get((end - start) / 2) > target) {
+                    end = end / 2;
+                } else {
+                    start = end / 2;
                 }
             }
         }
